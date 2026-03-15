@@ -1,0 +1,19 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "net.axosotle.food_api.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "FoodDataMixin",
+    "PlayerMixin"
+  ],
+  "client": [
+    "GuiMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "overwrites": {
+    "requireAnnotations": true
+  }
+}
