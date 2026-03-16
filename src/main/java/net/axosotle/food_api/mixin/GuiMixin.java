@@ -38,7 +38,7 @@ public class GuiMixin {
         Player player = food_api$getCameraPlayer(guiGraphics);
         if (player == null) return;
 
-        if (food_api$getMaxFood(player) > 20) {
+        if (!FoodApi.OB_LOADED && food_api$getMaxFood(player) > 20) {
             this.rightHeight += 10;
         }
     }
