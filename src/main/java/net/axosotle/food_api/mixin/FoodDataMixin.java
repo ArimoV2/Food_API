@@ -78,8 +78,26 @@ public class FoodDataMixin implements IFoodData {
         cir.setReturnValue(this.foodLevel < food_api$getMaxFoodLevel());
     }
 
+    private void food_api$clampToMax() {
+        int max = food_api$getMaxFoodLevel();
+        if (this.foodLevel > max) {
+            this.foodLevel = max;
+        }
+        if (this.saturationLevel > max) {
+            this.saturationLevel = max;
+        }
+    }
+
     @Inject(method = "add", at = @At("TAIL"))
     private void food_api$capSaturation(int foodLevel, float saturationLevel, CallbackInfo ci) {
-        this.saturationLevel = Math.min(this.saturationLevel, 20.0F);
+        food_api$clampToMax();
+    }
+
+    @Inject(method = "tick", at = @At("HEAD"))
+    private void food_api$clampOnTick(Player player, CallbackInfo ci) {
+        if (this.food_api$player == null) {
+            food_api$setPlayer(player);
+        }
+        food_api$clampToMax();
     }
 }
